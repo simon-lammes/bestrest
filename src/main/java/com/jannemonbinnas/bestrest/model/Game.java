@@ -1,6 +1,5 @@
 package com.jannemonbinnas.bestrest.model;
 
-import com.jannemonbinnas.bestrest.model.Series;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,9 +10,9 @@ import java.util.List;
 
 @Data
 @Entity
-public class StreamingService {
+public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @NotNull
     private long id;
 
@@ -22,6 +21,6 @@ public class StreamingService {
     @NotNull
     private String name = "";
 
-    @OneToMany(mappedBy = "streamingService", cascade = CascadeType.REMOVE)
-    private List<Series> series = new ArrayList<>();
+    @ManyToOne
+    Publisher publisher;
 }

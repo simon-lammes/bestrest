@@ -3,35 +3,24 @@ package com.jannemonbinnas.bestrest.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
-public class Episode {
+public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private long id = 0L;
-
-    @ManyToOne
-    private Series series = null;
-
-    @Min(value = 1)
-    private int season = 0;
-
-    @Min(value = 1)
-    private int number = 0;
-
-    @Column(length = 20, unique = true)
-    @Size(max = 20)
-    private String imdbId = "";
+    private long id;
 
     @Column(length = 64)
     @Size(min = 1, max = 64)
-    @NotNull()
+    @NotNull
     private String name = "";
 
-
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.REMOVE)
+    private List<Game> games = new ArrayList<>();
 }
